@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Customer Service — Serenité Jewelry</title>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<style>
+:root{
+  --bg:#fffafc;--muted:#6b5d65;--primary:#d98fa2;--maxwidth:1100px;
+  --shadow:0 6px 18px rgba(0,0,0,0.06);
+  font-family:Inter,system-ui,Arial;
+}
+body{margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:#222}
+.container{width:90%;max-width:var(--maxwidth);margin:0 auto;padding:20px}
+header{display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;gap:10px;align-items:center;text-decoration:none;color:inherit}
+.logo .mark{
+  width:44px;height:44px;border-radius:10px;
+  background:linear-gradient(135deg,#fff,#f7eef2);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;color:var(--primary);box-shadow:var(--shadow);
+}
+nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px}
+
+h1{margin-top:18px}
+.card{background:white;padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.06)}
+label{display:block;margin-top:10px;font-weight:700}
+input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #eee;margin-top:6px}
+.short-input{width:98%;}
+.btn{margin-top:12px;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700;background:var(--primary);color:#fff}
+.small{color:var(--muted)}
+footer{padding:28px 0;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<header class="container">
+  <a class="logo" href="index.html">
+    <div class="mark">S</div>
+    <div>
+      <div style="font-weight:800">Serenité</div>
+      <div class="small">Handmade Pearls & Beads</div>
+    </div>
+  </a>
+  <nav>
+    <a href="index.html">Home</a>
+  </nav>
+</header>
+
+<main class="container">
+  <h1>Customer Service</h1>
+  <div class="card">
+    <p class="small">Questions about materials, shipping, or custom orders? We’ll respond within 2 business days.</p>
+
+    <form id="csForm" action="https://formspree.io/f/xkgkwedp" method="POST">
+      <label for="name">Your name</label>
+      <input id="name" name="name" class="short-input" required>
+
+      <label for="contact">Email or Phone</label>
+      <input id="contact" name="contact" class="short-input" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <input type="hidden" name="_subject" value="New Customer Service message from Serenité">
+      <button class="btn" type="submit">Send message</button>
+    </form>
+
+    <div id="success" class="success" style="display:none;background:#e7f7ed;border:1px solid #bfe7cb;color:#2c6e49;padding:10px 12px;border-radius:8px;">Thanks! Your message was sent. We’ll reply soon.</div>
+    <div id="error" class="error" style="display:none;background:#fde8e8;border:1px solid #f5bcbc;color:#9b1c1c;padding:10px 12px;border-radius:8px;">Sorry, something went wrong. You can also email us at <strong>bizthingy@gmail.com</strong>.</div>
+  </div>
+</main>
+
+<footer class="container">
+  <div>© <strong>Serenité</strong></div>
+</footer>
+
+<script>
+const form = document.getElementById('csForm');
+const success = document.getElementById('success');
+const errorBox = document.getElementById('error');
+
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const data = new FormData(form);
+  try{
+    const res = await fetch(form.action, {
+      method:'POST',
+      body:data,
+      headers:{'Accept':'application/json'}
+    });
+    if(res.ok){
+      success.style.display='block';
+      errorBox.style.display='none';
+      form.reset();
+    } else {
+      errorBox.style.display='block';
+      success.style.display='none';
+    }
+  }catch(err){
+    errorBox.style.display='block';
+    success.style.display='none';
+  }
+});
+</script>
+</body>
+</html>

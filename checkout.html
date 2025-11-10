@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Checkout — Serenité Jewelry</title>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<style>
+:root{
+  --bg:#fffafc;--muted:#6b5d65;--primary:#d98fa2;
+  --shadow:0 6px 18px rgba(0,0,0,0.06);
+  --maxwidth:900px;font-family:Inter,system-ui,Arial;
+}
+body{margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:#222}
+.container{width:92%;max-width:var(--maxwidth);margin:24px auto;padding:18px}
+h1{margin-bottom:10px}
+.layout{display:grid;grid-template-columns:1fr 360px;gap:20px}
+.card{background:white;border-radius:12px;padding:16px;box-shadow:var(--shadow)}
+label{display:block;font-weight:700;margin-bottom:6px}
+input,textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid #eee}
+.form-row{margin-top:10px;max-width:460px}
+.btn{padding:10px 16px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 8px 26px rgba(217,143,162,0.18);}
+.btn-ghost{background:transparent;border:1px solid #f0e6ea;color:var(--muted)}
+.small{color:var(--muted);font-size:13px}
+footer{padding:28px 0;color:var(--muted);text-align:center}
+.divider{display:flex;align-items:center;text-align:center;margin:12px 0;color:var(--muted);font-size:14px}
+.divider::before,.divider::after{content:"";flex:1;border-bottom:1px solid #eee}
+.divider:not(:empty)::before{margin-right:.75em}
+.divider:not(:empty)::after{margin-left:.75em}
+@media(max-width:900px){.layout{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+  <!-- Pink continue shopping button -->
+  <a href="index.html" class="btn btn-primary" style="margin-bottom:10px;">← Continue Shopping</a>
+
+  <h1>Checkout</h1>
+
+  <div class="layout">
+    <!-- Shipping info -->
+    <div class="card">
+      <h2>Shipping & Contact</h2>
+      <form id="checkoutForm">
+        <div class="form-row"><label for="name">Full Name</label><input id="name" name="name" required></div>
+        <div class="form-row"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
+        <div class="form-row"><label for="phone">Phone (optional)</label><input id="phone" name="phone" type="tel"></div>
+        <div class="form-row"><label for="address">Address</label><input id="address" name="address" required></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:460px">
+          <div class="form-row" style="margin-top:0"><label for="city">City</label><input id="city" name="city" required></div>
+          <div class="form-row" style="margin-top:0">
+            <label for="state">State</label>
+            <select id="state" name="state" required>
+              <option value="">Select State</option>
+              <option>Alabama</option><option>Alaska</option><option>Arizona</option>
+              <option>Arkansas</option><option>California</option><option>Colorado</option>
+              <option>Connecticut</option><option>Delaware</option><option>Florida</option>
+              <option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+              <option>Illinois</option><option>Indiana</option><option>Iowa</option>
+              <option>Kansas</option><option>Kentucky</option><option>Louisiana</option>
+              <option>Maine</option><option>Maryland</option><option>Massachusetts</option>
+              <option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+              <option>Missouri</option><option>Montana</option><option>Nebraska</option>
+              <option>Nevada</option><option>New Hampshire</option><option>New Jersey</option>
+              <option>New Mexico</option><option>New York</option><option>North Carolina</option>
+              <option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+              <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option>
+              <option>South Carolina</option><option>South Dakota</option><option>Tennessee</option>
+              <option>Texas</option><option>Utah</option><option>Vermont</option>
+              <option>Virginia</option><option>Washington</option><option>West Virginia</option>
+              <option>Wisconsin</option><option>Wyoming</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row"><label for="zip">Postal Code</label><input id="zip" name="zip"></div>
+        <div class="form-row"><label for="notes">Order Notes (optional)</label><textarea id="notes" name="notes" rows="3"></textarea></div>
+        <div style="margin-top:14px"><button type="submit" class="btn btn-primary">Save Info</button></div>
+      </form>
+    </div>
+
+    <!-- Order summary -->
+    <aside class="card">
+      <h2>Your Order</h2>
+      <div id="itemsWrap"></div>
+      <div style="display:flex;justify-content:space-between;margin-top:10px">
+        <div class="small">Subtotal</div><div id="subtotal">$0.00</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:6px">
+        <div class="small">Shipping</div><div id="shipping">$3.50</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:10px;font-weight:800">
+        <div>Total</div><div id="total">$0.00</div>
+      </div>
+
+      <div id="paypal-container" style="margin-top:20px">
+        <div id="paypal-button-container"></div>
+        <div class="divider">or</div>
+        <div id="paypal-button-card"></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- PayPal SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=AZhJEvt85nzBB_-CTIWOCJM_hwqA390W7BxixmYkA9SNxPR9hvj_BoZXvZ9Spoxk7376jE2Hl5MevjgQ&components=buttons,marks,funding-eligibility&enable-funding=card&currency=USD"></script>
+
+<script>
+function loadCart(){ try{return JSON.parse(localStorage.getItem('serenite_cart')||'[]');} catch(e){return [];} }
+
+function renderOrder(){
+  const items=loadCart(),wrap=document.getElementById('itemsWrap');wrap.innerHTML='';
+  let subtotal=0;
+  items.forEach(i=>{
+    subtotal+=i.price*i.qty;
+    const el=document.createElement('div');
+    el.style.display='flex';el.style.justifyContent='space-between';
+    el.style.alignItems='center';el.style.marginBottom='8px';
+    el.innerHTML=`<div>${i.title} × ${i.qty}</div><div>$${(i.price*i.qty).toFixed(2)}</div>`;
+    wrap.appendChild(el);
+  });
+  document.getElementById('subtotal').innerText='$'+subtotal.toFixed(2);
+  const shipping=subtotal>0?3.50:0,total=subtotal+shipping;
+  document.getElementById('shipping').innerText=shipping>0?'$3.50':'$0.00';
+  document.getElementById('total').innerText='$'+total.toFixed(2);
+  return{subtotal,shipping,total};
+}
+
+let shippingData={};
+document.getElementById('checkoutForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const fd=new FormData(e.target);
+  shippingData=Object.fromEntries(fd.entries());
+  alert('Info saved! Now complete payment below.');
+});
+
+function initPayPalButtons(){
+  renderOrder();
+  if(!window.paypal) return;
+
+  function createOrder(actions){
+    const t=renderOrder().total;
+    if(t<=0){alert('Your cart is empty.');return;}
+    return actions.order.create({purchase_units:[{amount:{value:t.toFixed(2)}}]});
+  }
+
+  function onApprove(actions, successMsg){
+    return actions.order.capture().then(async details=>{
+      const cart=loadCart();
+      const lines=cart.map(i=>`${i.title} x ${i.qty} = $${(i.qty*i.price).toFixed(2)}`).join('\n');
+      const totals=renderOrder();
+      const msg=`New Order — Serenité Jewelry\n\n${lines}\n\nTotal: $${totals.total.toFixed(2)}\n\nCustomer Info:\n${JSON.stringify(shippingData,null,2)}`;
+      await fetch('https://formspree.io/f/xkgkwedp',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({_subject:'New Order',message:msg})});
+      alert(successMsg);
+      localStorage.removeItem('serenite_cart');window.location.href='index.html';
+    });
+  }
+
+  paypal.Buttons({
+    style:{layout:'vertical',color:'gold',shape:'rect',label:'paypal'},
+    fundingSource:paypal.FUNDING.PAYPAL,
+    createOrder:(data,actions)=>createOrder(actions),
+    onApprove:(data,actions)=>onApprove(actions,'Thank you! Your payment is complete.')
+  }).render('#paypal-button-container');
+
+  paypal.Buttons({
+    style:{layout:'vertical',color:'silver',shape:'rect',label:'pay'},
+    fundingSource:paypal.FUNDING.CARD,
+    createOrder:(data,actions)=>createOrder(actions),
+    onApprove:(data,actions)=>onApprove(actions,'Thank you! Your card payment is complete.')
+  }).render('#paypal-button-card');
+}
+
+document.addEventListener('DOMContentLoaded',()=>{renderOrder();initPayPalButtons();});
+</script>
+
+<footer>© Serenité — Handmade Jewelry</footer>
+
+<script src="cart.js"></script>
+</body>
+</html>
