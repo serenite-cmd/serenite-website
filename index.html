@@ -6,166 +6,254 @@
 <title>Serenité Jewelry — Handmade Pearls & Beads</title>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <style>
-:root{--bg:#fffafc;--card:#fff;--muted:#9b8b94;--accent:#f8d6df;--primary:#d98fa2;--pearl:#f6f5f6;--shadow:0 6px 18px rgba(18,18,18,0.06);--maxwidth:1100px;--radius:14px;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Helvetica Neue",Arial;}
-*{box-sizing:border-box} html,body{height:100%} body{margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:#222;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;padding-bottom:60px;}
-.container{width:90%;max-width:var(--maxwidth);margin:0 auto;}
-header{display:flex;justify-content:space-between;align-items:center;padding:20px 0;}
-.logo{display:flex;gap:10px;align-items:center;text-decoration:none;color:inherit;}
-.logo .mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#fff,#f7eef2);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);font-weight:700;color:var(--primary);}
-nav{display:flex;gap:16px;align-items:center}
+:root{
+  --bg:#fffafc; --card:#fff; --muted:#6b5d65; --accent:#f8d6df;
+  --primary:#d98fa2; --pearl:#f6f5f6; --shadow:0 6px 18px rgba(18,18,18,0.06);
+  --maxwidth:1100px; --radius:14px; font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Helvetica Neue",Arial;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:#222;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;padding-bottom:60px}
+.container{width:90%;max-width:var(--maxwidth);margin:0 auto}
+
+/* Header */
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
+.logo{display:flex;gap:10px;align-items:center;text-decoration:none;color:inherit}
+.logo .mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#fff,#f7eef2);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);font-weight:700;color:var(--primary)}
+nav{display:flex;gap:16px;align-items:center;position:relative}
 nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px}
 .cart-btn{position:relative;background:#fff;border:1px solid #f0e6ea;padding:8px;border-radius:10px;cursor:pointer;box-shadow:var(--shadow)}
-.cart-count{position:absolute;top:-6px;right:-6px;background:var(--primary);color:white;border-radius:50%;width:18px;height:18px;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:700;}
-.hero{display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center;padding:28px 0 40px;}
-.hero-left h1{font-size:36px;margin:0 0 8px;line-height:1.02;}
+.cart-count{position:absolute;top:-6px;right:-6px;background:var(--primary);color:white;border-radius:50%;width:18px;height:18px;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:700}
+
+/* Menu dropdown */
+.menu-dropdown{position:relative}
+.dropdown-toggle{background:transparent;border:none;cursor:pointer;font-weight:600;color:var(--muted);font-size:14px;padding:6px 8px;border-radius:8px}
+.dropdown-menu{position:absolute;right:0;top:46px;background:white;border-radius:10px;box-shadow:var(--shadow);padding:8px;min-width:190px;display:none;z-index:1000}
+.dropdown-menu.open{display:block}
+.dropdown-menu a{display:block;padding:8px 10px;color:#333;text-decoration:none;border-radius:8px;font-weight:600}
+.dropdown-menu a:hover{background:var(--pearl)}
+
+/* Hero & carousel */
+.hero{display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center;padding:28px 0 20px}
+.hero-left h1{font-size:36px;margin:0 0 8px;line-height:1.02}
 .tagline{color:var(--muted);margin-bottom:16px}
-.cta {display:flex;gap:12px;margin-top:18px;}
-.btn{padding:12px 18px;border-radius:12px;border:none;cursor:pointer;font-weight:700;}
-.btn-primary{background:var(--primary);color:white;box-shadow:0 8px 26px rgba(217,143,162,0.18)}
+.cta{display:flex;gap:12px;margin-top:18px}
+.btn{padding:12px 18px;border-radius:12px;border:none;cursor:pointer;font-weight:700}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 8px 26px rgba(217,143,162,0.18)}
 .btn-ghost{background:transparent;border:1px solid #f0e6ea;color:var(--muted)}
-.hero-right{background:linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.5));border-radius:16px;padding:14px;box-shadow:var(--shadow);}
-.hero-media{width:100%;height:320px;border-radius:12px;overflow:hidden;background:var(--pearl);display:flex;align-items:center;justify-content:center;position:relative;}
-.hero-media img, .hero-media video{width:100%;height:100%;object-fit:cover}
-.carousel{display:flex;overflow-x:auto;gap:14px;padding-bottom:12px;scroll-snap-type:x mandatory;}
-.carousel-item{flex:0 0 auto;width:260px;height:260px;border-radius:12px;overflow:hidden;background:var(--pearl);scroll-snap-align:center;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);}
-.carousel-item img{width:100%;height:100%;object-fit:cover;}
+.hero-right{background:linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,255,0.5));border-radius:16px;padding:14px;box-shadow:var(--shadow)}
+.hero-media{width:100%;height:320px;border-radius:12px;overflow:hidden;background:var(--pearl);display:flex;align-items:center;justify-content:center}
+.hero-media img{width:100%;height:100%;object-fit:cover}
+
+/* Preview carousel */
+.carousel-wrap{display:flex;align-items:center;gap:12px}
+.carousel{display:flex;overflow:hidden;gap:12px;padding:6px;scroll-behavior:smooth}
+.carousel-item{flex:0 0 200px;height:150px;border-radius:12px;overflow:hidden;background:var(--pearl);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+.carousel-item img{width:100%;height:100%;object-fit:cover}
+.carousel-btn{background:white;border-radius:10px;padding:8px;border:1px solid #eee;cursor:pointer;box-shadow:var(--shadow)}
+
+/* Collections / grid */
 section h2{margin:36px 0 12px;font-size:22px}
-.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-bottom:36px;}
-.product-card{background:var(--card);border-radius:14px;padding:12px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-bottom:36px}
+.product-card{background:var(--card);border-radius:14px;padding:12px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
 .product-media{height:180px;border-radius:10px;overflow:hidden;background:linear-gradient(180deg,#fff,#faf7fb);display:flex;align-items:center;justify-content:center}
 .product-media img{width:100%;object-fit:cover}
 .product-title{font-weight:700}
-.price{color:var(--muted);font-weight:700}
-.product-actions{display:flex;gap:8px;align-items:center}
-.cart-drawer{position:fixed;right:20px;top:80px;width:340px;background:white;border-radius:14px;padding:14px;box-shadow:0 30px 60px rgba(17,17,17,0.18);transform:translateX(120%);transition:transform .28s ease-in-out;z-index:80;}
+
+/* Backdrop + Cart drawer */
+#backdrop{position:fixed;inset:0;background:rgba(10,10,10,0.35);display:none;z-index:900}
+.cart-drawer{position:fixed;right:20px;top:70px;width:360px;background:#fff;border-radius:14px;padding:14px;box-shadow:0 30px 60px rgba(17,17,17,0.18);transform:translateX(120%);transition:transform .28s ease-in-out;z-index:1000;display:flex;flex-direction:column;max-height:calc(100vh - 100px);}
 .cart-drawer.open{transform:translateX(0)}
+.cart-items-scroll{overflow-y:auto;flex:1;margin-top:8px;padding-right:4px;}
+.cart-items-scroll::-webkit-scrollbar{width:6px;}
+.cart-items-scroll::-webkit-scrollbar-thumb{background-color:#ddd;border-radius:6px;}
 .cart-item{display:flex;gap:12px;margin-bottom:12px;align-items:center}
 .cart-item img{width:56px;height:56px;border-radius:8px;object-fit:cover}
-.qty{display:flex;gap:6px;align-items:center}
-.small{font-size:13px;color:var(--muted)}
+
+/* Right-side banner */
+.banner{position:fixed;right:20px;bottom:24px;background:#111;color:#fff;padding:12px 14px;border-radius:10px;box-shadow:var(--shadow);opacity:0;transform:translateY(12px);transition:all .35s;z-index:1200}
+.banner.show{opacity:1;transform:translateY(0)}
+
+/* Footer */
 footer{padding:28px 0;color:var(--muted);text-align:center;font-size:14px}
-@media (max-width:900px){.hero{grid-template-columns:1fr}.hero-right{order:-1}.cart-drawer{right:10px;top:70px;width:92%}}
-.muted{color:var(--muted)}
-.pill{background:var(--accent);padding:6px 10px;border-radius:999px;font-weight:700}
+
+/* Responsive */
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .hero-right{order:-1}
+  .carousel-item{flex:0 0 160px;height:120px}
+  .cart-drawer{right:10px;top:70px;width:92%}
+}
 a.link{color:var(--primary);text-decoration:none;font-weight:700}
+.small{font-size:13px;color:var(--muted)}
 </style>
 </head>
 <body>
+
 <header class="container">
-  <a class="logo" href="#">
+  <a class="logo" href="index.html">
     <div class="mark">S</div>
-    <div><div style="font-weight:800">Serenité</div><div class="muted" style="font-size:12px">Handmade Pearls & Beads</div></div>
+    <div>
+      <div style="font-weight:800">Serenité</div>
+      <div class="small">Handmade Pearls & Beads</div>
+    </div>
   </a>
+
   <nav>
-    <a href="#shop">Shop</a>
-    <a href="#story">Our Story</a>
+    <div class="menu-dropdown" id="menuDropdown">
+      <button class="dropdown-toggle" id="menuToggle" aria-expanded="false">Menu ▾</button>
+      <div class="dropdown-menu" id="menuList" aria-hidden="true">
+        <a href="all-products.html">All Products</a>
+        <a href="current-collections.html">Current Collections</a>
+        <a href="customer-service.html">Customer Service</a>
+        <a href="https://www.instagram.com/serentie3/" target="_blank" rel="noopener">Instagram (@serentie3)</a>
+        <a href="checkout.html">Cart</a>
+      </div>
+    </div>
+    <a href="#story" style="margin-left:6px">Our Story</a>
     <button class="cart-btn" id="openCartBtn" aria-label="Open cart">🛍️<div class="cart-count" id="cartCount">0</div></button>
   </nav>
 </header>
 
 <main class="container">
-
-<!-- Hero -->
-<section class="hero">
-  <div class="hero-left">
-    <h1>Handmade Pearls & Beads</h1>
-    <div class="tagline">Minimal, gift-ready jewelry inspired by the sea & blooms.</div>
-    <div class="cta">
-      <a href="current-collections.html"><button class="btn btn-primary">Shop Collection</button></a>
+  <section class="hero" aria-label="Hero">
+    <div class="hero-left">
+      <h1>Pearl & Rose — soft, gift-ready jewelry</h1>
+      <div class="tagline">Minimal, handmade chokers, bracelets, and earrings inspired by sea & bloom.</div>
+      <div class="cta">
+        <a href="current-collections.html" class="btn btn-primary">Shop Collection</a>
+        <a href="all-products.html" class="btn btn-ghost">View All</a>
+      </div>
     </div>
-  </div>
-  <aside class="hero-right">
-    <div class="hero-media">
-      <img src="https://via.placeholder.com/400x320" alt="Jewelry Hero">
+    <aside class="hero-right">
+      <div class="hero-media">
+        <img src="https://via.placeholder.com/800x600?text=Hero+Image" alt="Pearl jewelry hero">
+      </div>
+    </aside>
+  </section>
+
+  <section id="shop-preview">
+    <h2>Preview Collection</h2>
+    <div class="carousel-wrap">
+      <button class="carousel-btn" id="prevBtn" aria-label="Previous">◀</button>
+      <div class="carousel" id="carousel">
+        <div class="carousel-item"><img src="https://via.placeholder.com/400x300?text=Item+1" alt=""></div>
+        <div class="carousel-item"><img src="https://via.placeholder.com/400x300?text=Item+2" alt=""></div>
+        <div class="carousel-item"><img src="https://via.placeholder.com/400x300?text=Item+3" alt=""></div>
+        <div class="carousel-item"><img src="https://via.placeholder.com/400x300?text=Item+4" alt=""></div>
+      </div>
+      <button class="carousel-btn" id="nextBtn" aria-label="Next">▶</button>
     </div>
-  </aside>
-</section>
+    <div style="margin-top:12px;">
+      <a href="all-products.html"><button class="btn btn-primary">View All Products</button></a>
+    </div>
+  </section>
 
-<!-- Carousel Preview -->
-<section id="shop-preview">
-  <h2>Preview Collection</h2>
-  <div class="carousel">
-    <div class="carousel-item"><img src="https://via.placeholder.com/260" alt="Product 1"></div>
-    <div class="carousel-item"><img src="https://via.placeholder.com/260" alt="Product 2"></div>
-    <div class="carousel-item"><img src="https://via.placeholder.com/260" alt="Product 3"></div>
-  </div>
-  <div style="margin-top:12px;">
-    <a href="all-products.html"><button class="btn btn-primary">View All Products</button></a>
-  </div>
-</section>
+  <section id="shop">
+    <h2>Collections</h2>
+    <div class="grid" id="productGrid"></div>
+    <div style="margin-top:12px;">
+      <a href="current-collections.html"><button class="btn btn-primary">View Current Collections</button></a>
+    </div>
+  </section>
 
-<!-- Shop Grid (Seasonal / Limited) -->
-<section id="shop">
-  <h2>Collections</h2>
-  <div class="grid" id="productGrid"></div>
-  <div style="margin-top:12px;">
-    <a href="current-collections.html"><button class="btn btn-primary">View Current Collections</button></a>
-  </div>
-</section>
-
-<!-- Our Story -->
-<section id="story">
-  <h2>Our Story</h2>
-  <p class="muted">Handmade in small batches. Pearls are the heart of our brand — each piece is carefully strung, packaged in organza, and shipped in protective boxes for a sweet unboxing moment.</p>
-  <p class="muted" style="margin-top:8px">Follow us on Instagram for behind-the-scenes: <a class="link" href="#" target="_blank">@serenite_jewels</a>.</p>
-</section>
+  <section id="story">
+    <h2>Our Story</h2>
+    <p class="small">Handmade in small batches. Pearls are the heart of our brand — each piece is carefully strung, packaged in organza, and shipped in protective boxes for a sweet unboxing moment.</p>
+    <p class="small" style="margin-top:8px">Follow us on Instagram: <a class="link" href="https://www.instagram.com/serentie3/" target="_blank">@serentie3</a>.</p>
+  </section>
 </main>
 
+<div id="backdrop"></div>
 <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+  <!-- Header -->
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-shrink:0;">
     <div style="font-weight:800">Your Cart</div>
-    <button onclick="closeCart()" class="btn btn-ghost">Close</button>
+    <button id="closeCartBtn" class="btn btn-ghost">Close</button>
   </div>
-  <div id="cartItems"></div>
-  <div style="margin-top:12px;border-top:1px solid #f3edf0;padding-top:12px;display:flex;justify-content:space-between;align-items:center">
+
+  <!-- Scrollable list -->
+  <div id="cartItems" class="cart-items-scroll"></div>
+
+  <!-- Footer -->
+  <div style="margin-top:12px;border-top:1px solid #f3edf0;padding-top:12px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
     <div>
       <div class="small">Subtotal</div>
       <div style="font-weight:800" id="cartSubtotal">$0.00</div>
     </div>
-    <div id="paypal-button-container"></div>
+    <a href="checkout.html" class="btn btn-primary" id="proceedCheckout">Proceed to Checkout</a>
   </div>
 </aside>
 
+<div id="banner" class="banner">Added to cart ✓</div>
+
 <footer class="container">
-  <div>© <strong>Serenité</strong> — Handmade jewelry.</div>
-  <div style="margin-top:6px" class="muted">Built with ❤️ — customize as you like.</div>
+  <div>© <strong>Serenité</strong> — Handmade jewelry. Designed with care.</div>
 </footer>
 
-<script src="https://www.paypal.com/sdk/js?client-id=AZhJEvt85nzBB_-CTIWOCJM_hwqA390W7BxixmYkA9SNxPR9Spoxk7376jE2Hl5MevjgQ&currency=USD"></script>
 <script>
-const PRODUCTS=[{id:'pearl-choker-01',title:'Pearl Dream Choker',price:28,images:['https://via.placeholder.com/260'],description:'A delicate pearl choker.'},{id:'rose-bead-bracelet',title:'Rose Bead Bracelet',price:18,images:['https://via.placeholder.com/260'],description:'Romantic rose-tone glass beads.'}];
-
+const PRODUCTS = [
+  { id:'pearl-choker-01', title:'Pearl Dream Choker', price:28, images:['https://via.placeholder.com/600x600?text=Choker+Plain','https://via.placeholder.com/600x600?text=Choker+On+Model'] },
+  { id:'rose-bead-bracelet', title:'Rose Bead Bracelet', price:18, images:['https://via.placeholder.com/600x600?text=Bracelet+Plain','https://via.placeholder.com/600x600?text=Bracelet+On+Model'] },
+  { id:'seashell-earrings', title:'Coastal Shell Drops', price:22, images:['https://via.placeholder.com/600x600?text=Shell+Plain','https://via.placeholder.com/600x600?text=Shell+On+Model'] },
+  { id:'starry-glass', title:'Starry Glass Earrings', price:16, images:['https://via.placeholder.com/600x600?text=Star+Plain','https://via.placeholder.com/600x600?text=Star+On+Model'] },
+];
+function escapeHtml(str){ return String(str).replace(/[&<>"']/g, s=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;', "'":'&#39;' }[s])); }
 function renderProducts(){
-  const grid=document.getElementById('productGrid');grid.innerHTML='';
+  const grid = document.getElementById('productGrid'); grid.innerHTML='';
   PRODUCTS.forEach(p=>{
-    const card=document.createElement('div');
-    card.className='product-card';
-    card.innerHTML=`<div class="product-media"><img src='${p.images[0]}' alt='${p.title}'></div>
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <div>
-        <div class="product-title">${p.title}</div>
-        <div class="small muted">${p.description}</div>
+    const card = document.createElement('div'); card.className='product-card';
+    card.innerHTML = `
+      <div class="product-media">
+        <img src="${p.images[0]}" alt="${escapeHtml(p.title)}" data-plain="${p.images[0]}" data-model="${p.images[1]}">
       </div>
-      <div style="text-align:right">
-        <div class="price">$${p.price.toFixed(2)}</div>
-      </div>
-    </div>
-    <div class="product-actions">
-      <button class="btn btn-primary" onclick='addToCart({id:"${p.id}",title:"${p.title}",price:${p.price},qty:1,image:"${p.images[0]}"})'>Add</button>
-    </div>`;
+      <div class="product-title">${escapeHtml(p.title)}</div>
+    `;
+    const img = card.querySelector('img');
+    img.onmouseenter = ()=> img.src = img.dataset.model;
+    img.onmouseleave = ()=> img.src = img.dataset.plain;
     grid.appendChild(card);
   });
 }
-
-function loadCart(){return JSON.parse(localStorage.getItem('serenite_cart')||'[]');}
-function saveCart(cart){localStorage.setItem('serenite_cart',JSON.stringify(cart));refreshCartUI();}
-function addToCart(item){let cart=loadCart();let found=cart.find(c=>c.id===item.id);if(found){found.qty+=item.qty}else{cart.push(item);}saveCart(cart);}
-function refreshCartUI(){const cart=document.getElementById('cartItems');cart.innerHTML='';let subtotal=0;loadCart().forEach(item=>{subtotal+=item.qty*item.price;const el=document.createElement('div');el.className='cart-item';el.innerHTML=`<img src='${item.image}' alt='${item.title}'><div style='flex:1'><div style='font-weight:700'>${item.title}</div><div class='small muted'>$${item.price.toFixed(2)}</div><div style='margin-top:6px'><button onclick='removeFromCart("${item.id}")' class='btn btn-ghost'>Remove</button></div></div>`;cart.appendChild(el);});document.getElementById('cartCount').innerText=loadCart().reduce((s,i)=>s+i.qty,0);document.getElementById('cartSubtotal').innerText='$'+subtotal.toFixed(2);}
-function removeFromCart(id){let cart=loadCart().filter(i=>i.id!==id);saveCart(cart);}
-document.getElementById('openCartBtn').onclick=()=>document.getElementById('cartDrawer').classList.add('open');
-function closeCart(){document.getElementById('cartDrawer').classList.remove('open');}
-document.addEventListener('DOMContentLoaded',()=>{renderProducts();refreshCartUI();});
-paypal.Buttons({createOrder:(data,actions)=>{const total=loadCart().reduce((s,i)=>s+i.price*i.qty,0).toFixed(2);return actions.order.create({purchase_units:[{amount:{value:total}}]});},onApprove:(data,actions)=>{return actions.order.capture().then(details=>{alert('Transaction completed by '+details.payer.name.given_name);localStorage.removeItem('serenite_cart');refreshCartUI();closeCart();});}}).render('#paypal-button-container');
+const c = document.getElementById('carousel');
+if(c){
+  const items = Array.from(c.children);
+  let idx = 0;
+  function go(i){
+    idx = (i + items.length) % items.length;
+    c.scrollTo({ left: idx * (items[0].offsetWidth + 12), behavior:'smooth' });
+  }
+  document.getElementById('prevBtn').onclick = ()=> go(idx-1);
+  document.getElementById('nextBtn').onclick = ()=> go(idx+1);
+}
+document.addEventListener('DOMContentLoaded', ()=>{ renderProducts(); });
 </script>
+
+<script src="cart.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("menuToggle");
+  const menu = document.getElementById("menuList");
+
+  if (toggle && menu) {
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const open = menu.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", open);
+      menu.setAttribute("aria-hidden", !open);
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!menu.contains(e.target) && e.target !== toggle) {
+        menu.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+        menu.setAttribute("aria-hidden", "true");
+      }
+    });
+  }
+});
+</script>
+
 </body>
 </html>
