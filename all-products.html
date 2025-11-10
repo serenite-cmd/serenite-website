@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>All Products — Serenité Jewelry</title>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<style>
+/* Include the same CSS from index.html */
+:root{--bg:#fffafc;--card:#fff;--muted:#9b8b94;--accent:#f8d6df;--primary:#d98fa2;--pearl:#f6f5f6;--shadow:0 6px 18px rgba(18,18,18,0.06);--maxwidth:1100px;--radius:14px;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Helvetica Neue",Arial;}
+*{box-sizing:border-box} html,body{height:100%} body{margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:#222;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;padding-bottom:60px;}
+.container{width:90%;max-width:var(--maxwidth);margin:0 auto;}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 0;}
+.logo{display:flex;gap:10px;align-items:center;text-decoration:none;color:inherit;}
+.logo .mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#fff,#f7eef2);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);font-weight:700;color:var(--primary);}
+nav{display:flex;gap:16px;align-items:center}
+nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px}
+.cart-btn{position:relative;background:#fff;border:1px solid #f0e6ea;padding:8px;border-radius:10px;cursor:pointer;box-shadow:var(--shadow)}
+.cart-count{position:absolute;top:-6px;right:-6px;background:var(--primary);color:white;border-radius:50%;width:18px;height:18px;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:700;}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-bottom:36px;}
+.product-card{background:var(--card);border-radius:14px;padding:12px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;}
+.product-media{height:180px;border-radius:10px;overflow:hidden;background:linear-gradient(180deg,#fff,#faf7fb);display:flex;align-items:center;justify-content:center}
+.product-media img{width:100%;object-fit:cover}
+.product-title{font-weight:700}
+.price{color:var(--muted);font-weight:700}
+.product-actions{display:flex;gap:8px;align-items:center}
+.cart-drawer{position:fixed;right:20px;top:80px;width:340px;background:white;border-radius:14px;padding:14px;box-shadow:0 30px 60px rgba(17,17,17,0.18);transform:translateX(120%);transition:transform .28s ease-in-out;z-index:80;}
+.cart-drawer.open{transform:translateX(0)}
+.cart-item{display:flex;gap:12px;margin-bottom:12px;align-items:center}
+.cart-item img{width:56px;height:56px;border-radius:8px;object-fit:cover}
+footer{padding:28px 0;color:var(--muted);text-align:center;font-size:14px}
+.btn{padding:12px 18px;border-radius:12px;border:none;cursor:pointer;font-weight:700;}
+.btn-primary{background:var(--primary);color:white;box-shadow:0 8px 26px rgba(217,143,162,0.18)}
+.btn-ghost{background:transparent;border:1px solid #f0e6ea;color:var(--muted)}
+.muted{color:var(--muted)}
+a.link{color:var(--primary);text-decoration:none;font-weight:700}
+</style>
+</head>
+<body>
+<header class="container">
+  <a class="logo" href="index.html">
+    <div class="mark">S</div>
+    <div><div style="font-weight:800">Serenité</div><div class="muted" style="font-size:12px">Handmade Pearls & Beads</div></div>
+  </a>
+  <nav>
+    <a href="index.html">Home</a>
+    <button class="cart-btn" id="openCartBtn" aria-label="Open cart">🛍️<div class="cart-count" id="cartCount">0</div></button>
+  </nav>
+</header>
+
+<main class="container">
+<h2>All Products</h2>
+<div class="grid" id="productGrid"></div>
+</main>
+
+<aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+    <div style="font-weight:800">Your Cart</div>
+    <button onclick="closeCart()" class="btn btn-ghost">Close</button>
+  </div>
+  <div id="cartItems"></div>
+  <div style="margin-top:12px;border-top:1px solid #f3edf0;padding-top:12px;display:flex;justify-content:space-between;align-items:center">
+    <div>
+      <div class="small">Subtotal</div>
+      <div style="font-weight:800" id="cartSubtotal">$0.00</div>
+    </div>
+    <div id="paypal-button-container"></div>
+  </div>
+</aside>
+
+<footer class="container">
+  <div>© <strong>Serenité</strong> — Handmade jewelry.</div>
+</footer>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AZhJEvt85nzBB_-CTIWOCJM_hwqA390W7BxixmYkA9SNxPR9Spoxk7376jE2Hl5MevjgQ&currency=USD"></script>
+<script>
+const ALL_PRODUCTS=[{id:'misc-01',title:'Misc Product 1',price:12,images:['https://via.placeholder.com/260'],description:'A miscellaneous item.'},{id:'misc-02',title:'Misc Product 2',price:15,images:['https://via.placeholder.com/260'],description:'Another misc item.'}];
+
+function renderProducts(){
+  const grid=document.getElementById('productGrid');grid.innerHTML='';
+  ALL_PRODUCTS.forEach(p=>{
+    const card=document.createElement('div');
+    card.className='product-card';
+    card.innerHTML=`<div class="product-media"><img src='${p.images[0]}' alt='${p.title}'></div>
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div class="product-title">${p.title}</div>
+        <div class="small muted">${p.description}</div>
+      </div>
+      <div style="text-align:right">
+        <div class="price">$${p.price.toFixed(2)}</div>
+      </div>
+    </div>
+    <div class="product-actions">
+      <button class="btn btn-primary" onclick='addToCart({id:"${p.id}",title:"${p.title}",price:${p.price},qty:1,image:"${p.images[0]}"})'>Add</button>
+    </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function loadCart(){return JSON.parse(localStorage.getItem('serenite_cart')||'[]');}
+function saveCart(cart){localStorage.setItem('serenite_cart',JSON.stringify(cart));refreshCartUI();}
+function addToCart(item){let cart=loadCart();let found=cart.find(c=>c.id===item.id);if(found){found.qty+=item.qty}else{cart.push(item);}saveCart(cart);}
+function refreshCartUI(){const cart=document.getElementById('cartItems');cart.innerHTML='';let subtotal=0;loadCart().forEach(item=>{subtotal+=item.qty*item.price;const el=document.createElement('div');el.className='cart-item';el.innerHTML=`<img src='${item.image}' alt='${item.title}'><div style='flex:1'><div style='font-weight:700'>${item.title}</div><div class='small muted'>$${item.price.toFixed(2)}</div><div style='margin-top:6px'><button onclick='removeFromCart("${item.id}")' class='btn btn-ghost'>Remove</button></div></div>`;cart.appendChild(el);});document.getElementById('cartCount').innerText=loadCart().reduce((s,i)=>s+i.qty,0);document.getElementById('cartSubtotal').innerText='$'+subtotal.toFixed(2);}
+function removeFromCart(id){let cart=loadCart().filter(i=>i.id!==id);saveCart(cart);}
+document.getElementById('openCartBtn').onclick=()=>document.getElementById('cartDrawer').classList.add('open');
+function closeCart(){document.getElementById('cartDrawer').classList.remove('open');}
+document.addEventListener('DOMContentLoaded',()=>{renderProducts();refreshCartUI();});
+paypal.Buttons({createOrder:(data,actions)=>{const total=loadCart().reduce((s,i)=>s+i.price*i.qty,0).toFixed(2);return actions.order.create({purchase_units:[{amount:{value:total}}]});},onApprove:(data,actions)=>{return actions.order.capture().then(details=>{alert('Transaction completed by '+details.payer.name.given_name);localStorage.removeItem('serenite_cart');refreshCartUI();closeCart();});}}).render('#paypal-button-container');
+</script>
+</body>
+</html>
